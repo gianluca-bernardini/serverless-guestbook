@@ -1,26 +1,30 @@
 /**
  * Web application
  */
-const apiUrl = 'https://CHANGEME.us-south.apigw.appdomain.cloud/guestbook';
+const apiUrl = 'https://0b18a19c.us-south.apigw.appdomain.cloud/nocovid';
 const guestbook = {
   // retrieve the existing guestbook entries
   get() {
     return $.ajax({
       type: 'GET',
-      url: `${apiUrl}/entries`,
+      url: `${apiUrl}/records`,
       dataType: 'json'
     });
   },
   // add a single guestbood entry
-  add(name, email, comment) {
-    console.log('Sending', name, email, comment)
+  add(first, last, phone, emei, lat,long, comment) {
+    console.log('Sending', first, last, phone, emei, lat, long, comment)
     return $.ajax({
       type: 'PUT',
-      url: `${apiUrl}/entries`,
+      url: `${apiUrl}/records`,
       contentType: 'application/json; charset=utf-8',
       data: JSON.stringify({
-        name,
-        email,
+        first,
+        last,
+        phone,
+        emei,
+        lat,
+        long,
         comment,
       }),
       dataType: 'json',
@@ -61,8 +65,12 @@ const guestbook = {
     e.preventDefault();
 
     guestbook.add(
-      $('#name').val().trim(),
-      $('#email').val().trim(),
+      $('#first').val().trim(),
+      $('#last').val().trim(),
+      $('#phone').val().trim(),
+      $('#emei').val().trim(),
+      $('#lat').val().trim(),
+      $('#long').val().trim(),
       $('#comment').val().trim()
     ).done(function(result) {
       // reload entries
