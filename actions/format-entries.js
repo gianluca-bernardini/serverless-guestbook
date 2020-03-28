@@ -4,14 +4,21 @@
 const md5 = require('spark-md5');
 
 function main(params) {
-  // params contain the "rows" coming from Cloudant including the full documents
+  var data = params.params;
+  if (data === undefined) {
+      data = params;
+  }
   return {
-    entries: params.rows.map((row) => { return {
-      name: row.doc.name,
-	    email: row.doc.email,
-	    comment: row.doc.comment,
-	    createdAt: row.doc.createdAt,
-	    icon: (row.doc.email ? `https://secure.gravatar.com/avatar/${md5.hash(row.doc.email.trim().toLowerCase())}?s=64` : null)
+    entries: data.rows.map((row) => { return {
+      first: row.doc.first,
+      last: row.doc.last,
+      phone: row.doc.phone,
+      emei: row.doc.emei,
+      lat: row.doc.lat,
+      long: row.doc.long,
+      comment: row.doc.comment,
+      createdAt: row.doc.createdAt,
+      icon: null
     }})
-	};
-}
+  };
+};

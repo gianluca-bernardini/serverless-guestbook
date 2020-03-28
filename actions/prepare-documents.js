@@ -1,17 +1,22 @@
 /**
- * Prepare the guestbook entry to be persisted
+ * Prepare the nocovid entry to be persisted
  */
 function main(params) {
-  if (!params.name || !params.comment) {
-    return Promise.reject({error: 'no name or comment'});
+  if (!params.first || !params.comment) {
+    return Promise.reject({ error: 'no name or comment'});
   }
 
-	return {
+  return {
+    dbname: params.dbname,
     doc: {
-      createdAt: new Date(),
-	    name: params.name,
-	    email: params.email,
-	    comment: params.comment,
-	  }
+       createdAt: new Date(),
+       first: params.name,
+       last: params.last,
+       phone: params.phone,
+       emei: params.emei,
+       lat: params.lat,
+       long: params.long,
+       comment: params.comment
+    }
   };
 }
