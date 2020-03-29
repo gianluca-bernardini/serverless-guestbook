@@ -104,9 +104,8 @@ const guestbook = {
 
   // intercept the click on the delete button, removes the guestbook entry and
   // reload entries on success
-  $(document).on('submit', '#record', function(e) {
-    e.preventDefault();
-
+  deleteRecord() {
+    
     guestbook.remove(
       $('#docid').val().trim(),
       $('#docrev').val().trim()
@@ -116,7 +115,7 @@ const guestbook = {
     }).error(function(error) {
       console.log(error);
     });
-  });
+  };
 
   $(document).ready(function() {
     prepareTemplates();
