@@ -33,7 +33,7 @@ const guestbook = {
       data: jsonString,
       dataType: 'json',
     });
-  }
+  },
   // deletes a single guestbood entry
   remove(id, revision) {
     console.log('removing ', id, revision)
