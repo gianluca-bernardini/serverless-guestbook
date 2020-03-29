@@ -14,19 +14,23 @@ const guestbook = {
   // add a single guestbood entry
   add(first, last, phone, emei, lat,long, comment) {
     console.log('Sending', first, last, phone, emei, lat, long, comment)
+    var jsonString = JSON.stringify({
+      "dbname": "nocovid",
+      "first": first,
+      "last": last,
+      "phone": phone,
+      "emei": emei,
+      "lat":lat,
+      "long": long,
+      "comment": comment,
+    });
+    console.log(jsonString);
+
     return $.ajax({
       type: 'PUT',
       url: `${apiUrl}/records`,
       contentType: 'application/json; charset=utf-8',
-      data: JSON.stringify({
-        first,
-        last,
-        phone,
-        emei,
-        lat,
-        long,
-        comment,
-      }),
+      data: jsonString,
       dataType: 'json',
     });
   }
