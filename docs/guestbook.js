@@ -54,6 +54,21 @@ const guestbook = {
   }
 };
 
+// intercept the click on the delete button, removes the guestbook entry and
+// reload entries on success  
+function deleteRecord() {
+
+    guestbook.remove(
+      $('#docid').val().trim(),
+      $('#docrev').val().trim()
+    ).done(function(result) {
+      // reload entries
+      loadEntries();
+    }).error(function(error) {
+      console.log(error);
+    });
+  };
+
 (function() {
 
   let entriesTemplate;
@@ -101,21 +116,6 @@ const guestbook = {
       console.log(error);
     });
   });
-
-  // intercept the click on the delete button, removes the guestbook entry and
-  // reload entries on success
-  deleteRecord() {
-    
-    guestbook.remove(
-      $('#docid').val().trim(),
-      $('#docrev').val().trim()
-    ).done(function(result) {
-      // reload entries
-      loadEntries();
-    }).error(function(error) {
-      console.log(error);
-    });
-  };
 
   $(document).ready(function() {
     prepareTemplates();
