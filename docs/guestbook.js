@@ -102,6 +102,22 @@ const guestbook = {
     });
   });
 
+  // intercept the click on the delete button, removes the guestbook entry and
+  // reload entries on success
+  $(document).on('submit', '#record', function(e) {
+    e.preventDefault();
+
+    guestbook.remove(
+      $('#docid').val().trim(),
+      $('#docrev').val().trim()
+    ).done(function(result) {
+      // reload entries
+      loadEntries();
+    }).error(function(error) {
+      console.log(error);
+    });
+  });
+
   $(document).ready(function() {
     prepareTemplates();
     loadEntries();
