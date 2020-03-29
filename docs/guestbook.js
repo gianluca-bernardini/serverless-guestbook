@@ -34,6 +34,24 @@ const guestbook = {
       dataType: 'json',
     });
   }
+  // deletes a single guestbood entry
+  remove(id, revision) {
+    console.log('removing ', id, revision)
+    var jsonString = JSON.stringify({
+      "dbname": "nocovid",
+      "docid": id,
+      "docrev": revision
+    });
+    console.log(jsonString);
+
+    return $.ajax({
+      type: 'DELETE',
+      url: `${apiUrl}/records`,
+      contentType: 'application/json; charset=utf-8',
+      data: jsonString,
+      dataType: 'json',
+    });
+  }
 };
 
 (function() {
